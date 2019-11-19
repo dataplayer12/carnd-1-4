@@ -102,7 +102,7 @@ model.add(Dense(1,activation='tanh'))
 #Use mean squared error as loss and use adam optimizer
 model.compile(loss='mse', optimizer='adam')
 
-#fir the model to the data using the generators defined above
+#fit the model to the data using the generators defined above
 model.fit_generator(train_generator, steps_per_epoch=np.ceil(len(train_samples)/batch_size),
         validation_data=validation_generator, validation_steps=np.ceil(len(validation_samples)/batch_size),
         epochs=8, verbose=1)
