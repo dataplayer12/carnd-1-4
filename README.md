@@ -1,9 +1,5 @@
 # **Behavioral Cloning** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
 ---
 
 **Behavioral Cloning Project**
@@ -54,7 +50,7 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-Background: As a deep learning practitioner, I have realized that optimizing the architecture of the neural network is often more important than collecting more training data. Of course, training data should be enough to let the model generalize, but we often run into diminishing returns as we add data beyond a certain point. With this in mind, I collected training data by driving the car thrice around the course, but did not perform some of the more sophisticated data collection strategies outlined in the project, such as recording recoveries from teh sides of roads. Most of the thrust of my work was thus, in optimizing the architecture of the neural network. The architecture used in this project is inspired by a [paper](https://arxiv.org/abs/1412.6806) from Springenberg et. al., who proposed doing away with many dense layers at the end of a classifier and using convolutional layers as much as possible for modelling as well as downsampling. This reduces the number of parameters of the network and prevents overfitting usually associated with dense layers. Their paper inspired many successful architectures like VGG and ultimately ResNet. Thus, I found this architecture to be a good starting point for this project. Another paper used for designing this model was on [Wide ResNets](https://arxiv.org/abs/1605.07146) by Zagoruyko et al., who showed that wide CNNs with many filters in convlutional layers are more effective at classification tasks than deeper networks with fewer filters in their convolutional layers.
+**Background:** As a deep learning practitioner, I have realized that optimizing the architecture of the neural network is often more important than collecting more training data. Of course, training data should be enough to let the model generalize, but we often run into diminishing returns as we add data beyond a certain point. With this in mind, I collected training data by driving the car thrice around the course, but did not perform some of the more sophisticated data collection strategies outlined in the project, such as recording recoveries from teh sides of roads. Most of the thrust of my work was thus, in optimizing the architecture of the neural network. The architecture used in this project is inspired by a [paper](https://arxiv.org/abs/1412.6806) from Springenberg et. al., who proposed doing away with many dense layers at the end of a classifier and using convolutional layers as much as possible for modelling as well as downsampling. This reduces the number of parameters of the network and prevents overfitting usually associated with dense layers. Their paper inspired many successful architectures like VGG and ultimately ResNet. Thus, I found this architecture to be a good starting point for this project. Another paper used for designing this model was on [Wide ResNets](https://arxiv.org/abs/1605.07146) by Zagoruyko et al., who showed that wide CNNs with many filters in convlutional layers are more effective at classification tasks than deeper networks with fewer filters in their convolutional layers.
 
 ##### Architecture
 - The model starts out by cropping the input images to remove the sky and trees as well as the front hood of the car. The resulting image is 90x320x3. (line 72)
@@ -67,7 +63,7 @@ Background: As a deep learning practitioner, I have realized that optimizing the
 - Next we flatten the output of the previous layer into a 1-D tensor of size `7680`. (line 91)
 - We want to add a dense layer. In order to prevent overfitting, we add a dropout layer with a drop probability of 0.3. (line 94)
 - After dropout, we add a dense layer with `256` neurons. (line 97)
-- Finally we have a dense layer with one neuron predicting the driving command of the car. Importantly, we use `tanh` activation in this last layer to scale the output in the range [-1,1]. (line 100)
+- Finally we have a dense layer with one neuron predicting the driving command of the car. Importantly, we use `tanh` activation in this last layer to scale the output in the range [-1,1]. (line 100) The activation `tanh` allowed the model to make driving predictions which were realistic. The `tanh` also smoothed large gradients, especially at the beginning of the training, which were causing the model to go haywire.
 
 #### 2. Attempts to reduce overfitting in the model
 
